@@ -1,0 +1,2 @@
+# sherlock
+Personal stock calculation
