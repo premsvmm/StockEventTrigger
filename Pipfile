@@ -11,6 +11,7 @@ flask-sqlalchemy = "*"
 psycopg2 = "*"
 nsetools = "*"
 sqlalchemy = "*"
+python-crontab = "*"
 
 [requires]
 python_version = "3.7"
