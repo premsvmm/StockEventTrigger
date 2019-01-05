@@ -12,6 +12,7 @@ psycopg2 = "*"
 nsetools = "*"
 sqlalchemy = "*"
 python-crontab = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
