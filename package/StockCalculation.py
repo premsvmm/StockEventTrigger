@@ -9,8 +9,11 @@ class StockCalculation():
 
 
     def __init__(self):
+
         self.u = User()
+
         self.s = Stock()
+
         self.e = Email()
 
     def get_users(self):
@@ -43,9 +46,9 @@ class StockCalculation():
 
                         print("Stocks is postive")
 
-                        self.e.postiveprice_Email(user.username,stock.stockId,stock.buy,stock_values['lastPrice'])
+                        self.e.postiveprice_Email(user.email,user.username,stock.stockId,stock.buy,stock_values['lastPrice'])
 
-                        self.update_emailtrigger_status(user.id,stock.id)
+                        self.update_emailtrigger_status(user.id,stock.stockId)
 
 
                 if float(stock_values['lastPrice']) >= float(stock.sell):
@@ -54,9 +57,9 @@ class StockCalculation():
 
                         print("it came to the sell price")
 
-                        self.e.targetprice_email(user.username, stock.stockId, stock.buy, stock_values['lastPrice'])
+                        self.e.targetprice_email(user.email,user.username, stock.stockId, stock.buy, stock_values['lastPrice'])
 
-                        self.update_emailtrigger_status(user.id, stock.id)
+                        self.update_emailtrigger_status(user.id, stock.stockId)
 
                 if float(stock_values['lastPrice']) <= float(stock.loss):
 
@@ -64,15 +67,16 @@ class StockCalculation():
 
                         print("stocks goes in loss")
 
-                        self.e.loss_email(user.username, stock.stockId, stock.buy, stock_values['lastPrice'])
+                        self.e.loss_email(user.email,user.username, stock.stockId, stock.buy, stock_values['lastPrice'])
 
-                        self.update_emailtrigger_status(user.id, stock.id)
+                        self.update_emailtrigger_status(user.id, stock.stockId)
 
                 else:
 
                     print("ignore")
 
-                    self.update_emailtrigger_status(user.id, stock.id)
+
+
 
 
 

@@ -11,10 +11,12 @@ class Email():
 
         SUBJECT = f'Stock Updates(positive): {stockname}'
 
-        TEXT = f"Hi {username},\n\nThe stock price is in positive flow. \n\nStock Name : {stockname}\n\nStock brought Price : {buy}\n\nRight now Stock Price : {price}\nThanks,\n Sherlock"
+        TEXT = f"Hi {username},\n\nThe stock price is in positive flow. \n\nStock Name : {stockname}\n\nStock brought Price : {buy}\n\nRight now Stock Price : {price}\n \nThanks,\n Sherlock"
 
         # message to be sent
         message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
+
+        print(email,message)
 
         self.trigger_email(email,message)
 
@@ -24,10 +26,12 @@ class Email():
 
         SUBJECT = f'Stock Updates:(target) {stockname}'
 
-        TEXT = f"Hi {username},\n\nThe stock price is reach the target price. \n\nStock Name : {stockname}\n\nStock brought Price : {buy}\n\nRight now Stock Price : {price}\nThanks,\n Sherlock"
+        TEXT = f"Hi {username},\n\nThe stock price is reach the target price. \n\nStock Name : {stockname}\n\nStock brought Price : {buy}\n\nRight now Stock Price : {price}\n \nThanks,\n Sherlock"
 
         # message to be sent
         message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
+
+        print(email, message)
 
         self.trigger_email(email, message)
 
@@ -36,10 +40,12 @@ class Email():
 
         SUBJECT = f'Stock Updates:(loss) {stockname}'
 
-        TEXT = f"Hi {username},\n\nThe stock price is going loss right now. \n\nStock Name : {stockname}\n\nStock brought Price : {buy}\n\nRight now Stock Price : {price}\nThanks,\n Sherlock"
+        TEXT = f"Hi {username},\n\nThe stock price is going loss right now. \n\nStock Name : {stockname}\n\nStock brought Price : {buy}\n\nRight now Stock Price : {price}\n \nThanks,\n Sherlock"
 
         # message to be sent
         message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
+
+        print(email, message)
 
         self.trigger_email(email, message)
 
