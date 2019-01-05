@@ -1,24 +1,27 @@
 from model.Database_model import User
 from model.Database_model import Stock
+from package.EmailSender import Email
 from nsetools import Nse
 
 
 
 class StockCalculation():
 
+
+    def __init__(self):
+        self.u = User()
+        self.s = Stock()
+        self.e = Email()
+
     def get_users(self):
 
-        u = User()
-
-        value = u.get_all_user()
+        value = self.u.get_all_user()
 
         return value
 
     def get_stock_list(self,userId):
 
-        s =Stock()
-
-        value = s.get_stocklist_by_userid(userId)
+        value = self.s.get_stocklist_by_userid(userId)
 
         return value
 
@@ -40,21 +43,36 @@ class StockCalculation():
 
                         print("Stocks is postive")
 
+                        self.e.postiveprice_Email(user.username,stock.stockId,stock.buy,stock_values['lastPrice'])
+
+                        self.update_emailtrigger_status(user.id,stock.id)
+
+
                 if float(stock_values['lastPrice']) >= float(stock.sell):
 
                     if stock.emailtrigger:
 
                         print("it came to the sell price")
 
-                if float(stock_values['lastPrice']) <= float(stock.loss) :
+                        self.e.targetprice_email(user.username, stock.stockId, stock.buy, stock_values['lastPrice'])
+
+                        self.update_emailtrigger_status(user.id, stock.id)
+
+                if float(stock_values['lastPrice']) <= float(stock.loss):
 
                     if stock.emailtrigger:
 
                         print("stocks goes in loss")
 
+                        self.e.loss_email(user.username, stock.stockId, stock.buy, stock_values['lastPrice'])
+
+                        self.update_emailtrigger_status(user.id, stock.id)
+
                 else:
 
                     print("ignore")
+
+                    self.update_emailtrigger_status(user.id, stock.id)
 
 
 
@@ -63,6 +81,14 @@ class StockCalculation():
         nse = Nse()
 
         return nse.get_quote(stocksName)
+
+
+    def update_emailtrigger_status(self,userid,stockid):
+
+        s = Stock()
+
+        s.update_status_for_user_stock(userid,stockid)
+
 
 
 if __name__ == '__main__':

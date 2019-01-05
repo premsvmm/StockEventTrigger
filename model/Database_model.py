@@ -1,9 +1,11 @@
 from flask import  Flask
 from flask_sqlalchemy import SQLAlchemy
-import json
+from sqlalchemy import text
+from config import  Config
+
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://nicpyzmjegoerg:97597acac19280c803cba992f93b696450a7589ddaad0260d5d48ecae90ec079@ec2-79-125-4-96.eu-west-1.compute.amazonaws.com:5432/d9kugj8kddobam'
+app.config['SQLALCHEMY_DATABASE_URI'] = Config.DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -71,9 +73,20 @@ class Stock(db.Model):
 
     def create_stock(self,userid,stockId,buy,sell,loss):
         new_stock = Stock(userId = userid, stockId = stockId.upper() , buy = buy , sell = sell , loss = loss,
-                          emailtrigger =False)
+                          emailtrigger =True)
         db.session.add(new_stock)
         db.session.commit()
 
     def get_stocklist_by_userid(self,userid):
         return Stock.query.filter_by(userId=userid).all()
+
+    def update_status_for_user_stock(self,userid,stockid,status=False):
+        stock_list = Stock.query.filter_by(userid=userid).filter_by(stockid=stockid).first()
+        stock_list.emailtrigger = status
+        db.session.commit()
+
+
+    def update_status_to_true(self):
+        sql = text("UPDATE stocks set emailtrigger=TRUE WHERE emailtrigger in (SELECT emailtrigger from stocks where emailtrigger=FALSE)")
+        db.engine.execute(sql)
+        db.session.commit()
