@@ -100,7 +100,3 @@ if __name__ == '__main__':
     s =StockCalculation()
 
     s.stock_calculation()
-
-
-
-

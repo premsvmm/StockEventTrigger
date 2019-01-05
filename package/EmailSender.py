@@ -3,7 +3,9 @@ from config import Config
 class Email():
 
     def __init__(self):
+
         self.emailid = Config.EMAIL_ID
+
         self.emailpassword=Config.EMAIL_PASSWORD
 
 
