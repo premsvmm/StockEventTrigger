@@ -1,4 +1,4 @@
-FROM sherlock
+FROM premsvmm/sherlock
 
 RUN export LC_ALL=en_US.UTF-8
 RUN export LANG=en_US.UTF-8

@@ -7,3 +7,9 @@ Personal stock calculation
 
 #### To find where cron is installed
 `where crontab`
+
+#### To edit the cron jobs
+`crontab -e`
+
+#### to make the continer run always
+`docker run -td image name`
