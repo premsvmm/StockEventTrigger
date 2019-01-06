@@ -1,8 +1,16 @@
 #
 from crontab import CronTab
 cron = CronTab(user=True)
-job = cron.new(command='/usr/local/bin/python3 /Users/premkumar/Desktop/Experiment/sherlock/example1.py')
+job = cron.new(command='/usr/bin/python3 /var/www/premsvmm/StockClient.py')
 job.minutes.every(1)
+cron.write()
+
+
+
+from crontab import CronTab
+cron = CronTab(user=True)
+job = cron.new(command='/usr/bin/python3 /var/www/premsvmm/StockUpdateClient.py')
+job.hour.every(1)
 cron.write()
 
 

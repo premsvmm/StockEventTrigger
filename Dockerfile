@@ -1,9 +1,11 @@
-FROM premsvmm/ducati:v1
+FROM sherlock
 
-RUN  mkdir -p /var/www/java
-#  && chmod 777 /var/www/java -R
-COPY . /var/www/java
-WORKDIR /var/www/java
-#CMD ["java", "mvn"]
-#RUN apt-get install git-core
-RUN mvn clean compile
+RUN export LC_ALL=en_US.UTF-8
+RUN export LANG=en_US.UTF-8
+RUN export LC_ALL=C.UTF-8
+RUN export LANG=C.UTF-8
+RUN  mkdir -p /var/www/premsvmm
+
+COPY . /var/www/premsvmm
+WORKDIR /var/www/premsvmm
+
